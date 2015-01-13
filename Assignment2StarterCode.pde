@@ -6,6 +6,8 @@
     See: https://github.com/skooter500/DT228-OOP 
 */
 
+//making some changes
+
 ArrayList<Player> players = new ArrayList<Player>();
 boolean[] keys = new boolean[526];
 
