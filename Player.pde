@@ -1,85 +1,95 @@
-class Player
+class Player extends GameObject
 {
-  PVector pos;
-  char up;
-  char down;
-  char left;
-  char right;
-  char start;
-  char button1;
-  char button2;
-  int index;
-  color colour;
-    
+  float w, h;
+  
+  float timeDelta=5.0f/60.f;
+  float firerate=2.0f;
+  float ellapsed=0;
+  float toPass=1.0f/firerate;
+  
+  
+  Player(float x, float y, float w, float h)
+  {
+    position.x=x;
+    position.y=y;
+    this.w = w;
+    this.h = h;
+    colour = color(255);
+    theta = 0;
+    frameRate(60);
+  }
+
+  Player(float x, float y)
+  {
+    position.x = x;
+    position.y = y;
+    h = 20;
+    w = 20;
+    colour = color(255);
+    theta = 0;
+  }
+  
   Player()
   {
-    pos = new PVector(width / 2, height / 2);
-  }
-  
-  Player(int index, color colour, char up, char down, char left, char right, char start, char button1, char button2)
-  {
-    this();
-    this.index = index;
-    this.colour = colour;
-    this.up = up;
-    this.down = down;
-    this.left = left;
-    this.right = right;
-    this.start = start;
-    this.button1 = button1;
-    this.button2 = button2;
-  }
-  
-  Player(int index, color colour, XML xml)
-  {
-    this(index
-        , colour
-        , buttonNameToKey(xml, "up")
-        , buttonNameToKey(xml, "down")
-        , buttonNameToKey(xml, "left")
-        , buttonNameToKey(xml, "right")
-        , buttonNameToKey(xml, "start")
-        , buttonNameToKey(xml, "button1")
-        , buttonNameToKey(xml, "button2")
-        );
-  }
-  
-  void update()
-  {
-    if (checkKey(up))
-    {
-      pos.y -= 1;
-    }
-    if (checkKey(down))
-    {
-      pos.y += 1;
-    }
-    if (checkKey(left))
-    {
-      pos.x -= 1;
-    }    
-    if (checkKey(right))
-    {
-      pos.x += 1;
-    }
-    if (checkKey(start))
-    {
-      println("Player " + index + " start");
-    }
-    if (checkKey(button1))
-    {
-      println("Player " + index + " button 1");
-    }
-    if (checkKey(button2))
-    {
-      println("Player " + index + " butt2");
-    }    
+    x = width / 2;
+    y = width / 2;
+    w = 20;
+    h = 20;
+    colour = color(255);
+    theta = 0;
   }
   
   void display()
-  {    
+  {
+    pushMatrix();
+    translate(x, y);   
+    rotate(theta);
+    
     stroke(colour);
-    fill(colour);    
-    rect(pos.x, pos.y, 20, 20);
-  }  
+    float halfWidth = w / 2;
+    float  halfHeight = h / 2;
+    
+    line(-halfWidth, halfHeight, 0, - halfHeight);
+    line(0, - halfHeight, halfWidth, halfWidth);
+    line(halfWidth, halfHeight, 0, 0);
+    line(0,0,  - halfWidth, halfHeight);
+    popMatrix();
+  }
+  
+  void move()
+  {
+    ellapsed+=timeDelta;
+    float lx, ly;
+    lx = sin(theta);
+    ly = -cos(theta);
+    if (keyPressed)
+    {
+      switch (key)
+      {
+        case 'w':
+          x = x + lx;
+          y = y + ly;
+          break;
+        case 's':
+          y = y + 1;
+          break;
+        case 'a':
+          theta -= 0.1f;
+          break;
+        case 'd':
+          theta += 0.1f;
+          break;  
+        case ' ':
+          if (ellapsed>toPass)
+       {   
+          Bullet bullet = new Bullet();
+          bullet.x = x;
+          bullet.y = y;
+          bullet.theta = theta;
+          objects.add(bullet);
+          ellapsed=0.0f;
+      }
+      }
+    }
+  }
 }
