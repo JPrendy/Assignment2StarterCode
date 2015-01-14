@@ -2,7 +2,7 @@ class Player extends GameObject
 {
   float w, h;
   
-  float timeDelta=5.0f/60.f;
+  float timeDelta=10.0f/60.f;
   float firerate=2.0f;
   float ellapsed=0;
   float toPass=1.0f/firerate;
@@ -32,7 +32,7 @@ class Player extends GameObject
   Player()
   {
     x = width / 2;
-    y = width / 2;
+    y = height/ 2;
     w = 20;
     h = 20;
     colour = color(255);
@@ -54,6 +54,24 @@ class Player extends GameObject
     line(halfWidth, halfHeight, 0, 0);
     line(0,0,  - halfWidth, halfHeight);
     popMatrix();
+          if (x > width-20 )              // if the spaceship hits the side, it will moved to the other side of the screen
+  {
+    x=+30;                                  //If it did reverse the direction
+  }
+        if (x < 20 )                //Did the spaceship hit the side?
+  {
+    x=+580;                                  //If it did reverse the direction
+  }
+     if (y > height-20 )                //Did the spaceship hit the side?
+  {
+   
+   
+    y=+30;                                  //If it did reverse the direction
+  }
+        if (y < 20 )                //Did the spaceship hit the side?
+  {
+    y=+580;                                  //If it did reverse the direction
+  }
   }
   
   void move()
@@ -71,7 +89,7 @@ class Player extends GameObject
           y = y + ly;
           break;
         case 's':
-          y = y + 1;
+          y = y - ly;
           break;
         case 'a':
           theta -= 0.1f;

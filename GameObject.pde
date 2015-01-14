@@ -1,6 +1,6 @@
 class GameObject
 {
-  float x, y;
+  float x=400, y=400;//where the ship starts
   PVector forward;//PVectpr
   PVector position;//PVector
   float theta;
