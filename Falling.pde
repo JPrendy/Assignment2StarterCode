@@ -1,13 +1,14 @@
-class Alien {
+class Asteroid {
   float x,y,y2,x3,y3;   // Variables for the aliens
+//  float  y4=100;
    
   color c;     // color of the alien
  float speed; //speed of the aliens
-  Alien() {
+  Asteroid() {
                  
     x = random(0,750);     // Start with a random x location
     y = -20;
-    y2= -20;
+    y2= 640;
     x3=-20;
     y3=random(0,550);
     // Start a little above the window
@@ -20,8 +21,14 @@ class Alien {
   
     // Increment the speed of the aliens
     y += speed; 
-    y2 +=speed;
+    x -=speed;
+    y2 -=speed;
     x3 +=speed;
+    
+    if (x<0)
+    {
+      x=+780;
+    }
   }
 
   // Check if it hits the bottom
@@ -57,7 +64,15 @@ class Alien {
     fill(255);
     noStroke();
     for (int i = 2; i < 8; i++ ) {
-      rect(x,y ,30,30);
+      image(img17,x,y ,50,50);
+    }
+  }
+  
+    void display7() {
+    fill(255,0,0);
+    noStroke();
+    for (int i = 2; i < 8; i++ ) {
+      image(img18,x,y ,50,50);
     }
   }
 
@@ -91,8 +106,15 @@ class Alien {
     // Stop it from moving by setting speed equal to zero
     speed = 0; 
     // Set the location to somewhere way off-screen
-    y = - 20000;//  might change to x
-    y2= -20060; 
-    x3= -30000;
+   
+   y = - 200000000;//  might change to x
+    y2= -200600000; 
+    x3= -300000000;
+    
+// alien.remove()  ; 
+        
 }
+
+
+
 }
