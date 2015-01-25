@@ -494,3 +494,16 @@ if (lost==true)                                //If we lost the game, reset now 
 
 
 }
+
+void keyPressed()
+{
+  if(key=='p')
+  {
+   // squares[i].update(0);
+  // timer.start();
+    setup();
+     totalSquares = 0; 
+     timer2=2000;
+     fill(255);
+  }
+}
