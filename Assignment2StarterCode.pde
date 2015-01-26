@@ -30,7 +30,7 @@ int power;
 boolean lost=false;  // this boolean asks if you lost
 int boxSize = 75;
 PFont title;
-PImage img, img2,img3,img4,img5,img6,img7,img8,img9,img10,img11,img12,img13,img14,img15,img16,img17,img18,img19,img20,img21,img22; //this is where we declare
+PImage img, img2,img3,img4,img5,img6,img7,img8,img9,img10,img11,img12,img13,img14,img15,img16,img17,img18,img19,img20,img21,img22,img23,img24; //this is where we declare
 int score;
 boolean overBox = false;
 boolean locked = false;// makes sure the box is locked when starting
@@ -45,15 +45,17 @@ float fill=0;
 float fill2=255;
 float widdth=100;
 
+
+
 void setup() {
   
   
-  size(800,600);// it is 600 width size * 600 height size of the screen
+  size(900,600);// it is 600 width size * 600 height size of the screen
 
 
 img =loadImage("earth1.png"); img2 =loadImage("earth2.png"); img6=loadImage("Space2.jpg"); img7=loadImage("start4.png"); img8=loadImage("arrows.png");img10=loadImage("main.png"); img12=loadImage("tower.png");img13=loadImage("Space2.jpg"); img14=loadImage("bullet.png"); img15=loadImage("gameover2.png");
-img16=loadImage("s.png"); img17=loadImage("asteroid5.png");  img18 =loadImage("asteroid6.png");img9 =loadImage("earth3.png");img19= loadImage("earth4.png");img20= loadImage("earth5.png");img21= loadImage("earth6.png");img22= loadImage("earth7.png");
-
+img16=loadImage("s.png"); img17=loadImage("asteroid5.png");  img18 =loadImage("meteor3.png");img9 =loadImage("earth3.png");img19= loadImage("earth4.png");img20= loadImage("earth5.png");img21= loadImage("earth6.png");img22= loadImage("earth7.png"); img23= loadImage("earth8.png");
+img24=loadImage("meteor.png");
 
 catcher = new Catcher(50); // diameter of 50 for the spaceship
 catcher3 = new Catcher(50);// diameter of 50 for the cannons
@@ -76,7 +78,7 @@ sun= new Sun(500,200,50,5);//this is the sun location
   timer.start();      // This starts the timer
 
 
-lives=30; stage=1;  score=0; 
+lives=30; stage=1;  score=010; 
   
   title=createFont("font",500,true);
   
@@ -167,8 +169,8 @@ void draw() {
  text("Level:",750,80);
  text(power, 750, 110);// this is the variable for the power level
   // textSize(24);
-   text("Press'p'",400,50);
-  text("to shoot", 400, 80);  
+
+ 
   text("Fuel left",200,50);
    text(timer2, 200,80);
   fill(fill,fill2,0);
@@ -187,7 +189,9 @@ void draw() {
    }
   }
   
-  
+    fill(255,0,0);
+     text("Press'space'",400,50);
+  text("to shoot", 400, 80); 
   
     // Set catcher location  Display the catcher
   catcher.display();// display the ship
@@ -245,8 +249,10 @@ void draw() {
     for (int i = 0; i < totalSquares; i++ ) {
     squares[i].update(3); //this declare the initial speed of the aliens/squares
    // this displays the alien
-      if (frameCount %100 ==0) {
+      if (frameCount %100 >=0 && frameCount %100 <=40) {
+       
           squares[i].display7();
+        
       }
       else
       {
@@ -300,7 +306,7 @@ void draw() {
   //------------------------------------------------//
    // Move and display all red asteroids
    for (int i = 0; i < totalSquares; i+=4 ) {
-    squares2[i].update(3);//this declare the initial speed of the asteroid/squares
+    squares2[i].update(2);//this declare the initial speed of the asteroid/squares
       squares2[i].display2();// this causes the red asteroid/square to move
     if (catcher.intersect(squares2[i])) {
       squares2[i].caught(); // if the catcher interact with the red asteroid, it causes you to gain a point
@@ -326,7 +332,7 @@ void draw() {
   //-------------------------------------------------//
     // Move and display all blue asteroid
   for (int i = 0; i < totalSquares; i+=14 ) {
-     squares3[i].update(3);// this is the initial speed of the blue asteroids
+     squares3[i].update(2);// this is the initial speed of the blue asteroids
     squares3[i].display3();// this displays the blue asteroids/squares and make them move
     if (catcher.intersect(squares3[i])) {
       squares3[i].caught();
@@ -404,26 +410,7 @@ void draw() {
  }
    
    
-    //if you get this score it will display the winning mode
- if (score==40)
- {
-   
-   image(img13,0,0);
-   textSize(65);
-   fill(235,0,0);
-   text("Congratulations!",300,100);
-   textSize(42);
-   text("You Saved The Universe",300,200);
-   textSize(28);
-      text("final Power",120,520);//this displays the final score in the game
-    text(power, 120,560);
-    text("final score",300,520);//this displays the final score in the game
-    text(score, 300,560);
-    text("final Lives",490,520);//this displays the amount of final lives in the game
-    text(lives, 480,560);
-   image(img2,260,300,80,80);
-   noLoop();
- }
+
  
  // this will bring you to the game over screen when you have 0 lives
 if (lives==0)
@@ -432,17 +419,21 @@ if (lives==0)
     textSize(40);
     fill(255);
     text("You failed",20,20);
-  //  image(img15, 220,-30,img15.height/1.9,img15.width/1.8);
-    text("Click To Restart", 290,330);
-    text("final Score",290,380);
-    text(score, 290,440);
+
+ 
+  image(img6,0,0);
+    image(img23,220,20,100,100);
+    text("Press 'p' and Click To Restart ", 290,130);
+    text("final Score",290,180);
+    text(score, 290,240);
     if(score<=20){
-      text("Better luck ", 300,500);//this displays a different message depending on what score you get
-       text("Next Time", 300,560);
+      text("Better luck ", 300,300);//this displays a different message depending on what score you get
+       text("Next Time", 300,360);
+       text("Press 'p' and click to restart", 360, 480);
     }
      if(score>20){
-      text("You Have ",300,500);
-     text("The Power!", 300,560);
+      text("You Have ",300,300);
+     text("The Power!", 300,360);
     }
     noLoop();             //Stop looping at the end of the draw function
     lost=true;
@@ -490,9 +481,6 @@ if (lost==true)                                //If we lost the game, reset now 
     loop();     
         //Begin looping draw function again
   }
-
-
-
 }
 
 void keyPressed()
@@ -502,8 +490,23 @@ void keyPressed()
    // squares[i].update(0);
   // timer.start();
     setup();
+  //  draw();
      totalSquares = 0; 
-     timer2=2000;
+    timer2=2000;
      fill(255);
+     widdth=100;
+    loop();
   }
+   if(key=='l')
+  {
+    noLoop();
+    text("okay",160,220);
+    text("this is the pause screen",160,300);
+  }
+    if(key=='r')
+    {
+      loop();
+    }
+
+
 }

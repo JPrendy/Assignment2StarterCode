@@ -64,7 +64,7 @@ class Asteroid {
     fill(255);
     noStroke();
     for (int i = 2; i < 8; i++ ) {
-      image(img17,x,y ,50,50);
+      image(img24,x,y ,50,50);
     }
   }
   
