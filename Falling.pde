@@ -1,18 +1,20 @@
 class Asteroid {
-  float x,y,y2,x3,y3;   // Variables for the aliens
+  float x,x4,y,y2,x3,y3;   // Variables for the aliens
 //  float  y4=100;
    
   color c;     // color of the alien
  float speed; //speed of the aliens
+ 
   Asteroid() {
                  
     x = random(0,750);     // Start with a random x location
+    x4 = random(0,750);
     y = -20;
     y2= 640;
-    x3=-20;
+    x3= -20;
     y3=random(0,550);
     // Start a little above the window
-    
+   
      // Color
   }
 
@@ -22,6 +24,7 @@ class Asteroid {
     // Increment the speed of the aliens
     y += speed; 
     x -=speed;
+    x4+=speed;
     y2 -=speed;
     x3 +=speed;
     
@@ -79,9 +82,23 @@ class Asteroid {
   void display2() {
     // Display the red aliens
     fill(255,0,0);
-    noStroke();
+    stroke(255);
     for (int i = 2; i < 8; i++ ) {
-      rect(x,y2 ,30,30);
+      
+    image(img25,x,y2,40,40);
+
+    }
+  }
+  
+  
+   void display8() {
+    // Display the red aliens
+    fill(255,0,0);
+    stroke(255);
+    for (int i = 2; i < 8; i++ ) {
+      
+    image(img26,x,y2,40,40);
+
     }
   }
   
@@ -90,16 +107,36 @@ class Asteroid {
     fill(0,0,255);
     noStroke();
     for (int i = 2; i < 4; i++ ) {
-      rect(x,y ,30,30);
+      image(img28,x4,y ,40,40);
     }
   }
+  
+    void display9() {
+    // Display the blue aliens
+    fill(0,0,255);
+    noStroke();
+    for (int i = 2; i < 4; i++ ) {
+      image(img29,x4,y ,40,40);
+    }
+  }
+  
      void display4() {
     // Display the green aliens
     fill(0,255,0);
     noStroke();
     for (int i = 2; i < 4; i++ ) {
-      rect(x3,y3 ,30,30);
+      image(img30,x3,y3 ,40,40);
     }
+     }  
+    
+       void display10() {
+    // Display the green aliens
+    fill(0,255,0);
+    noStroke();
+    for (int i = 2; i < 4; i++ ) {
+      image(img31,x3,y3 ,40,40);
+    }
+   
   }
   // If the alien is caught
   void caught() {

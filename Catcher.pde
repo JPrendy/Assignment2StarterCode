@@ -12,7 +12,7 @@ float theta = 0;//this is for the rotations of the cannons
 int radius = 80;
 float speed2= .050;
 //this positions the cannons radius
-float  centerX=width/2.2;
+float  centerX=width/1.2;
  float centerY=height/1.2;
 
 
@@ -77,8 +77,12 @@ float  centerX=width/2.2;
       y=+580;                                  //If it did reverse the direction
     }
 
-    rect(x2, y2, 20, 20);
 
+    if (key==' ')//if the s key is pressed the bullet will go off
+    {
+     
+    rect(x2, y2, 20, 20);
+     // rect(x2, y2-50, 20, 20);
 
     float ly = -cos(theta);
     float lx = sin(theta);
@@ -86,9 +90,6 @@ float  centerX=width/2.2;
     // x += lx * speed;
     y2 += ly * speed;
     x2 += lx * speed;
-    if (key=='p')//if the s key is pressed the bullet will go off
-    {
-
 
 
       pushMatrix();
@@ -98,7 +99,7 @@ float  centerX=width/2.2;
       popMatrix();
     }
 
-    if (key!='p')//if it's not the s key it will go to the x direction
+    if (key!=' ')//if it's not the s key it will go to the x direction
     {
       y2=y;
       x2=x;
@@ -136,16 +137,19 @@ float  centerX=width/2.2;
   stroke(255);
 //  ellipse(width/2, height/2, 2*radius, 2*radius);
  
-  x3=cos(theta)*radius + centerX;
-  y3=sin(theta)*radius+ centerY;
+  x3=cos(theta)*radius*0.4 + centerX;
+  y3=sin(theta)*radius*0.4+ centerY;
   noStroke();
   fill(255);
-  ellipse(x3, y3, 20, 20);
+  image(img27,x3, y3, 40, 40);
+  ellipse(x3-400, y3-340, 20, 20);
   theta=theta+speed2;
     
    // image(img14, x, y3, 20, 20);//these displays the cannons
    // image(img14, x-300, y3, 20, 20);
   }
+
+
 
   void display4(float tempi)
   {
@@ -296,7 +300,7 @@ float  centerX=width/2.2;
   }
   boolean intersect3(Asteroid d) {
     // Calculate distance
-    float distance = dist(x, y3, d.x, d.y); //this sets up the distance between the catcher and the alien 
+    float distance = dist(x3, y3, d.x, d.y); //this sets up the distance between the catcher and the alien 
 
     if (distance < diam) { 
       return true;
@@ -316,7 +320,7 @@ float  centerX=width/2.2;
   }
   boolean intersect5(Asteroid d) {
     // Calculate distance
-    float distance = dist(x2, y2, d.x, d.y);  //this sets up the distance between the catcher and the alien 
+    float distance = dist(x, y2, d.x, d.y);  //this sets up the distance between the catcher and the alien 
     // Compare distance to sum of radii
     if (distance < diam2) { 
       return true;
@@ -326,7 +330,7 @@ float  centerX=width/2.2;
   }
   boolean intersect6(Asteroid d) {
     // Calculate distance
-    float distance = dist(x2, y2, d.x3, d.y3);  //this sets up the distance between the catcher cannon and the alien 
+    float distance = dist(x, y2, d.x3, d.y3);  //this sets up the distance between the catcher cannon and the alien 
     // Compare distance to sum of radii
     if (distance < diam2) { 
       return true;
