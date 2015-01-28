@@ -15,7 +15,6 @@ float speed2= .050;
 float  centerX=random(400,width/1.2);
  float centerY=random(380,height/1.2);
 
- 
 
   // float    x5=0;
   // float  y5=580;
@@ -41,6 +40,7 @@ float  centerX=random(400,width/1.2);
 
 
 
+  
   void display() {
     stroke(255);
     fill(col);
@@ -486,6 +486,30 @@ float  centerX=random(400,width/1.2);
       return false;
     }
   }
+  
+    boolean intersect19(Asteroid d) {
+    // Calculate distance
+    float distance = dist(x, y, d.x7, d.y7); //this sets up the distance between the catcher and the alien 
+    // Compare distance to sum of radii
+    if (distance < diam) { 
+      return true;
+    } else {
+      return false;
+    }
+  }
+  
+  
+    boolean intersect20(Asteroid d) {
+    // Calculate distance
+    float distance = dist(x2, y2, d.x7, d.y7); //this sets up the distance between the catcher and the alien 
+    // Compare distance to sum of radii
+    if (distance < diam) { 
+      return true;
+    } else {
+      return false;
+    }
+  }
+  
   
   
 }

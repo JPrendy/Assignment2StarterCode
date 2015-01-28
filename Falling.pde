@@ -4,7 +4,10 @@ class Asteroid {
    
   color c;     // color of the alien
  float speed; //speed of the aliens
- 
+ float x7=random(50,550);
+float y7=random(20,880); 
+
+
   Asteroid() {
                  
     x = random(0,750);     // Start with a random x location
@@ -17,6 +20,16 @@ class Asteroid {
    
      // Color
   }
+
+void display17()
+{
+  image(img34,x7,y7,20,20);
+} 
+
+void display18()
+{
+  image(img35,x7,y7,20,20);
+} 
 
   void update(float tempx){
     speed=tempx;
@@ -147,7 +160,7 @@ class Asteroid {
    y = - 200000000;//  might change to x
     y2= -200600000; 
     x3= -300000000;
-    
+    x7= -2000000000;
 // alien.remove()  ; 
         
 }

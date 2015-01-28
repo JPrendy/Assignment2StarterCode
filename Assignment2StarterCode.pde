@@ -1,10 +1,21 @@
 //C13446122 8-bit asteroid game
 //here another update on the project
 
+//------PREMISE-----//
+//it's a space shooter where you to have to
+//defend the earth from the asteroids as long as possible
+//the longer you last the better score you get
+
+//------------GAME MECHANICS--------------//
 //you play the game with w,a,s,d controls and use the space button to shoot
 //the grey asteroid causes you to lose a life
+//the red asteroid gives you a point
+//the blue asteroid gives you a life
+//the green asteroid gives you energy to form a blackhole when it's at 3, the blackholes help with the other asteroids
+//the yellow star gives fuel to the spaceship
+//the sun gives fuel to the spaceship
+//if  the spaceship loses all its fuel the controls are reversed
 
-//here is where to add music
 
 
 import ddf.minim.* ;  ///this is where I declare variables for sound in the game
@@ -24,6 +35,7 @@ Asteroid[] squares;   //this is for the asteroid that gets rid of a life
 Asteroid[] squares2;  //this is for the asteroid that gets
 Asteroid[] squares3;  //this is for the asteroid that gets
 Asteroid[] squares4;  //this is for the asteroid that gets
+Asteroid[] squares5;  //this is for the asteroid that gets
 Asteroid asteroid;// this is where we declare all the alien squares that are falling
 Sun sun;
 
@@ -37,7 +49,7 @@ int power;
 boolean lost=false;  // this boolean asks if you lost
 int boxSize = 75;
 PFont title;
-PImage img, img2,img3,img4,img5,img6,img7,img8,img9,img10,img11,img12,img13,img14,img15,img16,img17,img18,img19,img20,img21,img22,img23,img24,img25,img26,img27,img28,img29,img30,img31,img32,img33; //this is where we declare
+PImage img, img2,img3,img4,img5,img6,img7,img8,img9,img10,img11,img12,img13,img14,img15,img16,img17,img18,img19,img20,img21,img22,img23,img24,img25,img26,img27,img28,img29,img30,img31,img32,img33,img34,img35; //this is where we declare
 int score;
 boolean overBox = false;
 boolean locked = false;// makes sure the box is locked when starting
@@ -82,12 +94,8 @@ au_player4 = minim.loadFile("spacemusic.mp3")  ;
 
 img =loadImage("earth1.png"); img2 =loadImage("earth2.png"); img6=loadImage("Space2.jpg"); img7=loadImage("start4.png"); img10=loadImage("main.png"); img13=loadImage("Space2.jpg"); img14=loadImage("bullet.png"); 
 img16=loadImage("s.png"); img17=loadImage("asteroid5.png");  img18 =loadImage("meteor3.png");img9 =loadImage("earth3.png");img19= loadImage("earth4.png");img20= loadImage("earth5.png");img21= loadImage("earth6.png");img22= loadImage("earth7.png"); img23= loadImage("earth8.png");
-img24=loadImage("meteor.png");img25=loadImage("meteor4.png");
-img26=loadImage("meteor5.png");img27=loadImage("blackholef.png");
-img28=loadImage("meteorb.png"); img29=loadImage("meteorb2.png");
-img30=loadImage("meteorgs.png");img31=loadImage("meteorgs3.png");
-img32=loadImage("earthdeath.png");img33=loadImage("bullet2.png");
-
+img24=loadImage("meteor.png");img25=loadImage("meteor4.png");img26=loadImage("meteor5.png");img27=loadImage("blackholef.png");img28=loadImage("meteorb.png"); img29=loadImage("meteorb2.png");
+img30=loadImage("meteorgs.png");img31=loadImage("meteorgs3.png");img32=loadImage("earthdeath.png");img33=loadImage("bullet2.png");img34=loadImage("starf2.png");   img35=loadImage("starf3.png"); 
 
 catcher = new Catcher(50); // diameter of 50 for the spaceship
 catcher3 = new Catcher(50);// diameter of 50 for the cannons
@@ -98,6 +106,9 @@ squares = new Asteroid[1000]; // there will be an array of 100 asteroid that tak
 squares2 = new Asteroid[1000];// there will be an array of 100 asteroid that take away lives
 squares3 = new Asteroid[1000];// there will be an array of 100 asteroid that take away lives
 squares4 = new Asteroid[1000];// there will be an array of 100 asteroid that take away lives
+squares5 = new Asteroid[1000];// there will be an array of 100 asteroid that take away lives
+
+
 
 sun= new Sun(700,200,50,5);//this is the sun location
 
@@ -126,15 +137,15 @@ void draw() {
     image(img6,0,0); // we use this image in our splash screen
     textAlign(CENTER,BOTTOM);// this is where the text is aligned
     textSize(52);// the size of the text
-    text("8-bit Asteroids",450,80);
+    text("8-BIT ASTEROIDS",450,80);
     textSize(32);// the size of text
-    text("SAVE THE CITY",450,130);
+    text("SAVE THE EARTH",450,130);
     text("Normal",250,260);
     text("Mode",250, 300);
       text("Difficult",250,390);
     text("Mode",250,430);
     
-     text("How To Play", 580, 345);    
+     text("How To Play", 600, 345);    
     image(img7,bx, by, boxSize, boxSize);// this is where we use images to make the buttons look nicer
     image(img7,bx2,by2,boxSize, boxSize);
      image(img7,bx4,by4,boxSize, boxSize);// this is where we use images to make the buttons look nicer
@@ -174,7 +185,7 @@ void draw() {
     stroke(153);
       stage=2;
       au_player1.play() ;
-      catcher.setLocation(280,500);   catcher3.setLocation2(750,20);   catcher4.setLocation(300,300);
+      catcher.setLocation(280,500);   catcher3.setLocation2(750,20);   catcher4.setLocation(300,300); 
      
         widdth=50;
         timer2=1000;
@@ -208,32 +219,22 @@ void draw() {
      background(0);
     image(img6,0,0);// this is the image that will be used in the main game
    noSmooth(); stroke(255); fill(255);  // these change the colours and sharpness in the game
-  text("Lives:",200,50);
-  text(lives, 200, 80);
- 
- 
- 
-// image(img12,440,565,40,40);// this declare the cannons at the bottom of the screen
- //image(img12,140,565,40,40);// this declare the cannons at the bottom of the screen
- 
- 
- 
- 
- 
- 
- text("Score:",550,50);
- text(score, 550, 80);
- text("Power",750, 50);
+  text("Lives:",150,50);
+  text(lives, 150, 80);
+
+ text("Score:",750,50);
+ text(score, 750, 80);
+ text("Energy",850, 50);
  
  //text("Level:",750,80);
 if(widddth<=20)
  {
    widddth++;
  }
-
-    ellipse(750,100,20+widddth,20+widddth);
-  fill(255,0,0);
- text(power, 750, 110);// this is the variable for the power level
+     fill(255,0,125);
+    ellipse(850,80,20+widddth,20+widddth);
+  fill(255);
+ text(power, 850, 90);// this is the variable for the power level
   // textSize(24);
   
 
@@ -259,8 +260,8 @@ if(widddth<=20)
   textSize(20);
     fill(255,0,0);
      text("Press 'space'",100,550);
-  text("to shoot", 100, 580); 
-   text("Press'p'",800,550);
+  text("key to shoot", 100, 580); 
+   text("Press'p' key",800,550);
   text("to pause", 800, 580); 
  
     // Set catcher location  Display the catcher
@@ -273,12 +274,19 @@ if(widddth<=20)
   
   
   //using the cannons
-   if(score>=10 && score<=15 || score>=25 && score<=30)
+   if(power>=3 && power<=5 || power>=6 && power<=8)
   {
   catcher3.mousePressed();
   catcher3.display2();
+  text("You had enough energy to", 450,50);
+  text("help make blackholes to help you",450,80);
   }
   
+  
+ 
+      
+      
+      
     // Check the timer
   if (timer.isFinished()) {
     // Deals with the falling Aliens rate at they appear
@@ -287,6 +295,7 @@ if(widddth<=20)
     squares2[totalSquares] = new Asteroid();
      squares3[totalSquares] = new Asteroid();
      squares4[totalSquares] = new Asteroid();
+     squares5[totalSquares] = new Asteroid();
     // Increment totalsquares
     totalSquares ++ ;
     // If we hit the end of the array
@@ -305,6 +314,10 @@ if(widddth<=20)
       if (totalSquares >= squares4.length) {
       totalSquares = 0; // Start over
     }
+     timer.start();
+      if (totalSquares >= squares5.length) {
+      totalSquares = 0; // Start over
+    }
     timer.start();
   }
   
@@ -314,7 +327,40 @@ if(widddth<=20)
   {
     lives=10;
   }
+ 
+ 
+ 
+ //-----------------------this is for the star----------------------------------------------------------///
+      for (int i = 0; i < totalSquares; i+=18 ) {
+
+        if (frameCount %100 >=0 && frameCount %100 <=40) {
+       
+          squares5[i].display17();
+        
+      }
+      else
+      {
+      squares5[i].display18();
+      }
+       
   
+        
+   if (catcher.intersect19(squares5[i])) {
+      squares5[i].caught();  
+      timer2+=300;
+         fill-=74.0;
+   fill2+=74.0;
+   widdth+=14.8;
+  }  
+      //this is the spaceship bullet interaction with the asteroid
+    if (catcher.intersect20(squares5[i])) {
+      squares5[i].caught();       
+     timer2+=300;
+            fill-=74.0;
+   fill2+=74.0;
+   widdth+=14.8;
+      }
+      }
 
   
   //---------------------------------------these are the grey asteroids-----------//
@@ -353,7 +399,7 @@ if(widddth<=20)
              }         
              
    //these are the cannon interactions           
-    if(score>=10 && score<=15 || score>=25 && score<=30){   
+   if(power>=3 && power<=5 || power>=6 && power<=8){   
     if (catcher3.intersect17(squares[i])) {
       squares[i].caught();  }
     if (catcher3.intersect18(squares[i])) {
@@ -416,8 +462,8 @@ if(widddth<=20)
              } 
       
         //if you get this score it causes the canon to goes off and get a point  
-     if(score>=10 && score<=15 || score>=25 && score<=30){
-     
+     if(power>=3 && power<=5 || power>=6 && power<=8)
+     {
     if (catcher3.intersect14(squares2[i])) {
       squares2[i].caught();
       score++;}
@@ -463,7 +509,7 @@ if(widddth<=20)
              }         
        
                 //if you get this score it causes the canon to goes off and get a point  
-     if(score>=10 && score<=15 || score>=25 && score<=30){
+     if(power>=3 && power<=5 || power>=6 && power<=8){
      
     if (catcher3.intersect3(squares3[i])) {
       squares3[i].caught();
@@ -512,7 +558,7 @@ if(widddth<=20)
       
       
         //if you get this score it causes the canon to goes off and get a point  
-     if(score>=10 && score<=15 || score>=25 && score<=30){
+    if(power>=3 && power<=5 || power>=6 && power<=8){
      
     if (catcher3.intersect7(squares4[i])) {
       squares4[i].caught();
@@ -531,26 +577,28 @@ if(widddth<=20)
     text("How To Play",140,80);
     text("____________",140,95);
     textSize(20);
-    text("(1)Colliding with the grey asteroid loses a life", 350, 150);
-    image(img24,620,130,50,50);
-    text("(2).Colliding with the red asteroid gives a point", 350,220);
-        image(img26,620,200,50,50);
-    text("(3).Colliding with the blue asteroid gains a life",350,290);
-        image(img28,620,270,50,50);
-    text("(4).Colliding with the green asteroid increases the fuel you have",350,360);
-        image(img30,660,340,50,50);
-    text("(5)If you run out of fuel, your controls are in reverse",450,430);
-    text("You need to go to the sun to get more fuel",450,450);
-    text("(6)You control the spaceship using w,a,s,d",450,500);
-    text("and shoot using the space key",450,520);
-    text("You can pause the game by pressing 'p'",450,560);
-    text("and restart the game by pressing 'r'",450,580);
+    text("(1)Colliding with the grey asteroid loses a life", 350, 130);
+    image(img24,620,90,50,50);
+    text("(2).Colliding with the red asteroid gives a point", 350,190);
+        image(img26,620,150,50,50);
+    text("(3).Colliding with the blue asteroid gains a life",350,250);
+        image(img28,650,220,40,40);
+    text("(4).Colliding with the green asteroid gives energy to make blackholes",340,310);
+        image(img30,680,270,40,40);
+         text("(5).Colliding with a mini star gives you fuel",340,370);
+         image(img34,680,340,40,40);
+    text("(6)If you run out of fuel, your controls are in reverse",400,430);
+    text("You need to go to the sun to get more fuel",400,450);
+    text("(7)You control the spaceship using w,a,s,d",400,510);
+    text("and shoot using the space key",400,530);
+    
+    text("You can pause the game by pressing 'p'",400,560);
+    text("and restart the game by pressing 'r'",400,580);
         
-  //  rect(w,h-80,50,50);
-   // rect(w,h,50,50);
-    //rect(w,h+100,50,50);
-   // rect(w,h+200,50,50);
-   // rect(w-25,h+280,100,100);
+ 
+   
+  
+    
     image(img10,bx3,by3,boxSize,boxSize);
    // rect(w-80,h+320,50,50);
     
@@ -675,23 +723,25 @@ void keyPressed()
     text("Game is Paused",450,60);
     text("Press 'l' key to resume the game",450,80);
     fill(255);
-    text("(1)Colliding with the grey asteroid loses a life", 380, 150);   
-    text("(2).Colliding with the red asteroid gives a point", 380,220);
-    text("(3).Colliding with the blue asteroid gains a life",380,290);
-    text("(4).Colliding with the green asteroid increases the fuel you have",360,360);
-    text("(5)If you run out of fuel, your controls are in reverse",450,430);
-    text("You need to go to the sun to get more fuel",450,450);
-    text("(6)You control the spaceship using w,a,s,d",450,500);
-    text("and shoot using the space key",450,520);
+    text("(1)Colliding with the grey asteroid loses a life", 380, 120);   
+    text("(2).Colliding with the red asteroid gives a point", 380,175);
+    text("(3).Colliding with the blue asteroid gains a life",380,230);
+    text("(4).Colliding with the green asteroid gives ",380,285);
+    text("you energy to create black holes",330,315);
+    text("(5).Colliding with a mini star gives you fuel",340,370);
+    text("(6)If you run out of fuel, your controls are in reverse",350,425);
+    text("You need to go to the sun to get more fuel",380,455);
+    text("(7)You control the spaceship using w,a,s,d",380,510);
+    text("and shoot using the space key",450,540);
     fill(255,0,0);
     textSize(30);
-    text("Press 'r' to restart",450,570);
+    text("Press 'r' to restart",450,580);
        
-    image(img24,620,130,50,50);
-    image(img26,620,200,50,50);  
-    image(img28,620,270,50,50);
-     image(img30,660,340,50,50);
-    
+    image(img24,620,90,40,40);
+    image(img26,620,145,40,40);  
+    image(img28,620,200,40,40);
+     image(img30,620,255,40,40);
+    image(img34,620,340,40,40);
     
     
     
