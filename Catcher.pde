@@ -67,7 +67,7 @@ float  centerX=random(400,width/1.2);
     }
     if (x < 20 )                //Did the spaceship hit the side?
     {
-      x=+580;                                  //If it did reverse the direction
+      x=+880;                                  //If it did reverse the direction
     }
     if (y > height-20 )                //Did the spaceship hit the side?
     {

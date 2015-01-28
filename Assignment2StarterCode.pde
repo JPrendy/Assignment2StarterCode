@@ -52,10 +52,23 @@ float fill=0;
 float fill2=255;
 float widdth=100;
 float widddth=0;
+  boolean devMode = false;
+boolean sketchFullScreen() {
+  return ! devMode;
+}
 
 
 void setup() {
-  
+
+
+  if (devMode)
+  {
+    size(800, 600);
+  }
+  else
+  {
+    size(displayWidth, displayHeight);
+  }
   
   size(900,600);// it is 600 width size * 600 height size of the screen
 
@@ -518,11 +531,14 @@ if(widddth<=20)
     text("How To Play",140,80);
     text("____________",140,95);
     textSize(20);
-    text("(1)Colliding with the grey asteroid loses a life", 450, 150);
-    
-    text("(2).Colliding with the red asteroid gives a point", 450,220);
-    text("(3).Colliding with the blue asteroid gains a life",450,290);
-    text("(4).Colliding with the green asteroid increases the fuel you have",450,360);
+    text("(1)Colliding with the grey asteroid loses a life", 350, 150);
+    image(img24,620,130,50,50);
+    text("(2).Colliding with the red asteroid gives a point", 350,220);
+        image(img26,620,200,50,50);
+    text("(3).Colliding with the blue asteroid gains a life",350,290);
+        image(img28,620,270,50,50);
+    text("(4).Colliding with the green asteroid increases the fuel you have",350,360);
+        image(img30,660,340,50,50);
     text("(5)If you run out of fuel, your controls are in reverse",450,430);
     text("You need to go to the sun to get more fuel",450,450);
     text("(6)You control the spaceship using w,a,s,d",450,500);
@@ -657,12 +673,12 @@ void keyPressed()
        image(img6,0,0);
    
     text("Game is Paused",450,60);
-    text("Press 'l' to resume the game",450,80);
+    text("Press 'l' key to resume the game",450,80);
     fill(255);
-    text("(1)Colliding with the grey asteroid loses a life", 450, 150);   
-    text("(2).Colliding with the red asteroid gives a point", 450,220);
-    text("(3).Colliding with the blue asteroid gains a life",450,290);
-    text("(4).Colliding with the green asteroid increases the fuel you have",450,360);
+    text("(1)Colliding with the grey asteroid loses a life", 380, 150);   
+    text("(2).Colliding with the red asteroid gives a point", 380,220);
+    text("(3).Colliding with the blue asteroid gains a life",380,290);
+    text("(4).Colliding with the green asteroid increases the fuel you have",360,360);
     text("(5)If you run out of fuel, your controls are in reverse",450,430);
     text("You need to go to the sun to get more fuel",450,450);
     text("(6)You control the spaceship using w,a,s,d",450,500);
@@ -670,6 +686,18 @@ void keyPressed()
     fill(255,0,0);
     textSize(30);
     text("Press 'r' to restart",450,570);
+       
+    image(img24,620,130,50,50);
+    image(img26,620,200,50,50);  
+    image(img28,620,270,50,50);
+     image(img30,660,340,50,50);
+    
+    
+    
+    
+    
+    
+    
   }
     if(key=='l')
     {
