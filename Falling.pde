@@ -62,7 +62,7 @@ class Asteroid {
     }
   }
 
-  // Display the black aliens
+  // Display the grey asteroids
   void display() {
     fill(255);
     noStroke();
@@ -80,7 +80,7 @@ class Asteroid {
   }
 
   void display2() {
-    // Display the red aliens
+    // Display the red asteroids
     fill(255,0,0);
     stroke(255);
     for (int i = 2; i < 8; i++ ) {
@@ -92,7 +92,7 @@ class Asteroid {
   
   
    void display8() {
-    // Display the red aliens
+    // Display the red asteroids
     fill(255,0,0);
     stroke(255);
     for (int i = 2; i < 8; i++ ) {
@@ -103,7 +103,7 @@ class Asteroid {
   }
   
     void display3() {
-    // Display the blue aliens
+    // Display the blue asteroids
     fill(0,0,255);
     noStroke();
     for (int i = 2; i < 4; i++ ) {
@@ -112,7 +112,7 @@ class Asteroid {
   }
   
     void display9() {
-    // Display the blue aliens
+    // Display the blue asteroids
     fill(0,0,255);
     noStroke();
     for (int i = 2; i < 4; i++ ) {
@@ -121,7 +121,7 @@ class Asteroid {
   }
   
      void display4() {
-    // Display the green aliens
+    // Display the green asteroids
     fill(0,255,0);
     noStroke();
     for (int i = 2; i < 4; i++ ) {
@@ -130,7 +130,7 @@ class Asteroid {
      }  
     
        void display10() {
-    // Display the green aliens
+    // Display the green asteroids
     fill(0,255,0);
     noStroke();
     for (int i = 2; i < 4; i++ ) {
