@@ -21,16 +21,18 @@ float y7=random(20,880);
      // Color
   }
 
+//this is an animation for the star
 void display17()
 {
   image(img34,x7,y7,20,20);
 } 
-
+//this is an animation for the star
 void display18()
 {
   image(img35,x7,y7,20,20);
 } 
 
+//this what happens when they interact
   void update(float tempx){
     speed=tempx;
   
@@ -83,7 +85,7 @@ void display18()
       image(img24,x,y ,50,50);
     }
   }
-  
+  //displays an animation for the grey asteroid
     void display7() {
     fill(255,0,0);
     noStroke();

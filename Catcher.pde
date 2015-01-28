@@ -40,7 +40,7 @@ float  centerX=random(400,width/1.2);
 
 
 
-  
+  //this displays the spaceship and bullet
   void display() {
     stroke(255);
     fill(col);
@@ -102,17 +102,14 @@ float  centerX=random(400,width/1.2);
       popMatrix();
     }
 
-    if (key!=' ')//if it's not the s key it will go to the x direction
+    if (key!=' ')//if it's not the space key it will go to the x direction
     {
       y2=y;
       x2=x;
     }
 
-    //  if(y2<10)// if it goes above 10 it will go to the y direction
-    //  {
-    // y2=y;
-    // }
-
+  
+//if it hit the edge of the screen, it will appear on another side
     if (x2<0)
     {
       x2=width;
@@ -133,7 +130,7 @@ float  centerX=random(400,width/1.2);
 }
 
   
-
+//this displays the blackholes
   void display2()
   {
       
@@ -154,7 +151,7 @@ float  centerX=random(400,width/1.2);
   }
 
 
-
+//this displays the earth and it's many animations
   void display4(float tempi)
   {
     i+=tempi;
@@ -195,15 +192,7 @@ float  centerX=random(400,width/1.2);
     
   }
 
-  void caught2() {
-
-    fill(0);
-    stroke(255);        
-    rect(x, y4, 20, 20);
-
-    stroke(255, 255, 0);
-    //   noFill();
-  }
+ 
 
   void mousePressed()
   {
@@ -218,7 +207,7 @@ float  centerX=random(400,width/1.2);
     }
   } 
 
-
+//this causes the spaceship to move and rotate
   void move()
   {
     float lx, ly;
@@ -246,7 +235,7 @@ float  centerX=random(400,width/1.2);
     }
   }
 
-
+//this will cause the opposite controls to function
   void move2()
   {
     float lx, ly;
@@ -368,6 +357,7 @@ float  centerX=random(400,width/1.2);
       return false;
     }
   }
+  //the interaction between grey asteroid and spaceship
   boolean intersect9(Asteroid d) {
     // Calculate distance
     float distance = dist(x, y, d.x, d.y);//this sets up the distance between the catcher and the alien 
@@ -405,7 +395,7 @@ float  centerX=random(400,width/1.2);
       return false;
     }
   }
-  
+  //this is  the interaction with the planet and red asteroid
     boolean intersect12(Asteroid d) {
 
     float distance =dist(x, y, d.x, d.y2);
@@ -416,7 +406,7 @@ float  centerX=random(400,width/1.2);
       return false;
     }
   }
-  
+  //this is the interaction between the bullet and red asteroid
    boolean intersect13(Asteroid d) {
 
     float distance =dist(x2, y2, d.x, d.y2);
@@ -486,7 +476,7 @@ float  centerX=random(400,width/1.2);
       return false;
     }
   }
-  
+  //this is the interaction between the spaceship and star
     boolean intersect19(Asteroid d) {
     // Calculate distance
     float distance = dist(x, y, d.x7, d.y7); //this sets up the distance between the catcher and the alien 
@@ -498,7 +488,7 @@ float  centerX=random(400,width/1.2);
     }
   }
   
-  
+  //this is the interaction between the bullet and star
     boolean intersect20(Asteroid d) {
     // Calculate distance
     float distance = dist(x2, y2, d.x7, d.y7); //this sets up the distance between the catcher and the alien 

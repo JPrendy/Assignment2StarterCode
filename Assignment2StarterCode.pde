@@ -1,5 +1,5 @@
 //C13446122 8-bit asteroid game
-//here another update on the project
+
 
 //------PREMISE-----//
 //it's a space shooter where you to have to
@@ -32,10 +32,10 @@ Timer timer;        // timer object for the asteroids which add the asteroids
 
 
 Asteroid[] squares;   //this is for the asteroid that gets rid of a life
-Asteroid[] squares2;  //this is for the asteroid that gets
-Asteroid[] squares3;  //this is for the asteroid that gets
-Asteroid[] squares4;  //this is for the asteroid that gets
-Asteroid[] squares5;  //this is for the asteroid that gets
+Asteroid[] squares2;  //this is for the asteroid that gets get a point
+Asteroid[] squares3;  //this is for the asteroid that gets gets a point
+Asteroid[] squares4;  //this is for the asteroid that gets gets energy point
+Asteroid[] squares5;  //this is for the asteroid that gets gets spaceship fuel
 Asteroid asteroid;// this is where we declare all the alien squares that are falling
 Sun sun;
 
@@ -86,7 +86,7 @@ void setup() {
 
    minim = new Minim(this) ;// this is where the sound files are loaded
 
-
+//these are the sound files
 au_player1 = minim.loadFile(  "sc.wav")  ;
 au_player2 = minim.loadFile(  "Laser_Shoot4.wav")  ;
 au_player3 = minim.loadFile(  "sound1.wav")  ;
@@ -147,7 +147,7 @@ void draw() {
     
      text("How To Play", 600, 345);    
     image(img7,bx, by, boxSize, boxSize);// this is where we use images to make the buttons look nicer
-    image(img7,bx2,by2,boxSize, boxSize);
+    image(img7,bx2,by2,boxSize, boxSize);// this is where we use images to make the buttons look nicer
      image(img7,bx4,by4,boxSize, boxSize);// this is where we use images to make the buttons look nicer
     
     
@@ -174,7 +174,7 @@ void draw() {
       }
       
       
-          //stage 2++  hard mode
+          //stage 2++  hard mode there is less fuel and less lives
      //this is where the other button is placed and if the mouse presses it goes to that stage
      if (mousePressed== mouseX > bx4-boxSize && mouseX < bx4+boxSize && 
       mouseY > by4-boxSize && mouseY < by4+boxSize)
@@ -214,7 +214,7 @@ void draw() {
       
       // if stage 2 was selected it brings you here
    if (stage==2){
-    au_player4.play() ;
+    au_player4.play() ;//plays the music
      tint(255,255,255);// this change the rate of the colours strength in the image
      background(0);
     image(img6,0,0);// this is the image that will be used in the main game
@@ -226,7 +226,7 @@ void draw() {
  text(score, 750, 80);
  text("Energy",850, 50);
  
- //text("Level:",750,80);
+ //this is used a fuel gauge to show how much fuel we have left
 if(widddth<=20)
  {
    widddth++;
@@ -244,7 +244,7 @@ if(widddth<=20)
   fill(fill,fill2,0);
   rect(10,80,widdth,20);
 
-  
+  //this is the timer to the fuel
   if (timer2>i)
   {
    timer2-=2 ;
@@ -254,6 +254,7 @@ if(widddth<=20)
    if(widdth==0)
    {
      widdth+=0;
+     lives--;
    }
   }
   
@@ -273,7 +274,7 @@ if(widddth<=20)
  
   
   
-  //using the cannons
+  //using the blackhoes that form when you have enough energy
    if(power>=3 && power<=5 || power>=6 && power<=8)
   {
   catcher3.mousePressed();
@@ -322,7 +323,7 @@ if(widddth<=20)
   }
   
   
-  
+  //this is the maxium amount lives you can have
    if(lives>10)
   {
     lives=10;
@@ -331,20 +332,16 @@ if(widddth<=20)
  
  
  //-----------------------this is for the star----------------------------------------------------------///
-      for (int i = 0; i < totalSquares; i+=18 ) {
-
-        if (frameCount %100 >=0 && frameCount %100 <=40) {
-       
-          squares5[i].display17();
-        
-      }
+      for (int i = 0; i < totalSquares; i+=22 ) {
+//we are swapping between the images to give animation effect
+        if (frameCount %100 >=0 && frameCount %100 <=40) {       
+          squares5[i].display17();}
       else
       {
       squares5[i].display18();
       }
        
-  
-        
+ //this is used for the intersection  
    if (catcher.intersect19(squares5[i])) {
       squares5[i].caught();  
       timer2+=300;
@@ -365,8 +362,8 @@ if(widddth<=20)
   
   //---------------------------------------these are the grey asteroids-----------//
     for (int i = 0; i < totalSquares; i+=2 ) {
-    squares[i].update(3); //this declare the initial speed of the aliens/squares
-   // this displays the alien
+    squares[i].update(3); //this declare the initial speed of the asteroid
+   // this updates the asteroid speed after a certain time
    if(frameCount %20000 ==0)
    {
      squares[i].update(1);
@@ -398,7 +395,7 @@ if(widddth<=20)
       catcher4.display4(1); //here is where you change the image of the earth when hit
              }         
              
-   //these are the cannon interactions           
+   //these are the blackhole interactions           
    if(power>=3 && power<=5 || power>=6 && power<=8){   
     if (catcher3.intersect17(squares[i])) {
       squares[i].caught();  }
@@ -421,6 +418,7 @@ if(widddth<=20)
     if(timer2>2000)
     { timer2=2000; 
   }  }
+  //this is another effect for the fuel gauge
   
   //if the fuel hits zero it changes the ship movements
     if(timer2==0)
@@ -434,9 +432,9 @@ if(widddth<=20)
   //------------------------------------------------//
    // Move and display all red asteroids
    for (int i = 0; i < totalSquares; i+=4 ) {
-    squares2[i].update(2);//this declare the initial speed of the asteroid/squares
+    squares2[i].update(2);//this declare the initial speed of the asteroid
  
-   
+   //here we are using the animation effect again
       if (frameCount %100 >=0 && frameCount %100 <=40) {
        
           squares2[i].display8();
@@ -454,14 +452,14 @@ if(widddth<=20)
       score++;
       }
       if (catcher.intersect13(squares2[i])) {
-      squares2[i].caught();  // if the catcher interact with the asteroid , it moves the alien and causes you to lose alife
+      squares2[i].caught();  // if the catcher interact with the asteroid , it moves the asteroid and causes you to lose alife
       score++;}
       if (catcher4.intersect12(squares2[i])) {
       squares2[i].caught();  
       score++;
              } 
       
-        //if you get this score it causes the canon to goes off and get a point  
+        //if you get this score it causes the blackholes to form 
      if(power>=3 && power<=5 || power>=6 && power<=8)
      {
     if (catcher3.intersect14(squares2[i])) {
@@ -480,35 +478,30 @@ if(widddth<=20)
   for (int i = 0; i < totalSquares; i+=3 ) {
      squares3[i].update(2);// this is the initial speed of the blue asteroids
        
-   
+   //here is the animation effect again
       if (frameCount %100 >=0 && frameCount %100 <=40) {
-       
-          squares3[i].display9();
-        
+          squares3[i].display9();   
       }
       else
       {
       squares3[i].display3();
       }
-    
-     
-     
 
     if (catcher.intersect(squares3[i])) {
       squares3[i].caught();
-       catcher4.display4(-1);
+       catcher4.display4(-0.5);
       lives++; }
       if (catcher.intersect5(squares3[i])) {
-      squares3[i].caught();  // if the catcher interact with the asteroid
-      catcher4.display4(-1); 
+      squares3[i].caught();  // if the catcher interact with the asteroid, you will gain a life
+      catcher4.display4(-0.5); 
        lives++;  }
        if (catcher4.intersect11(squares3[i])) {
       squares3[i].caught();  
-       catcher4.display4(-1);
+       catcher4.display4(-0.5);
       lives++;
              }         
        
-                //if you get this score it causes the canon to goes off and get a point  
+                //if you get this score it causes the blackhole to start
      if(power>=3 && power<=5 || power>=6 && power<=8){
      
     if (catcher3.intersect3(squares3[i])) {
@@ -527,37 +520,30 @@ if(widddth<=20)
        // Move and display all green asteroids
     for (int i = 0; i < totalSquares; i+=18 ) {
  
-    
-    
         squares4[i].update(2);// this is the initial speed of the blue asteroids
        
-   
+   //this is used for the animation effect
       if (frameCount %100 >=0 && frameCount %100 <=40) {
-       
           squares4[i].display10();
-        
       }
       else
       {
       squares4[i].display4();
       }
-    
-    
-    
-    
+
     
     if (catcher.intersect2(squares4[i])) {
-      squares4[i].caught();// if the catcher interacts with the blue alien it puts up the power 
+      squares4[i].caught();// if the catcher interacts with the green asteroid it puts up the power 
       power++;   }
     if (catcher.intersect6(squares4[i])) {
-      squares4[i].caught();  // if the catcher interact with the alien , it moves the alien and causes you to lose alife
+      squares4[i].caught();  
       power++;       }
       if (catcher4.intersect2(squares4[i])) {
-      squares4[i].caught();  // if the catcher interact with the alien , it moves the alien and causes you to lose alife
+      squares4[i].caught();  
       power++;       }
       
       
-        //if you get this score it causes the canon to goes off and get a point  
+        //if you get this score it causes the blackholes to form 
     if(power>=3 && power<=5 || power>=6 && power<=8){
      
     if (catcher3.intersect7(squares4[i])) {
@@ -633,7 +619,7 @@ if (lives==0)
       text("Better luck ", 450,300);//this displays a different message depending on what score you get
        text("Next Time", 450,360);
          text("Click to begin where you left off  ", 450,440);
-    text("with one more life  ", 450,480);
+    text("with 5 more lives  ", 450,480);
     fill(255,204,0);
     text("or",450,530);
     fill(255);
@@ -643,7 +629,7 @@ if (lives==0)
       text("Nice ",450,300);
      text("score", 450,360);
     text("Click to begin where you left off  ", 450,440);
-    text("with one more life  ", 450,480);
+    text("with o  ", 450,480);
     fill(255,204,0);
     text("or",450,530);
     fill(255);
@@ -687,7 +673,7 @@ if (lost==true)                                //If we lost the game, reset now 
    au_player4.play();
       //Reset all variables to initial conditions
     textSize(28);
-    lives=2;
+    lives=5;
     score=0;
     power=0;
      catcher.setLocation(280,500);
@@ -700,7 +686,7 @@ if (lost==true)                                //If we lost the game, reset now 
 
 void keyPressed()
 {
-  if(key=='r')
+  if(key=='r')//this is where you reset the game when you press 'r'
   {
      minim.stop() ;
     setup();
@@ -714,7 +700,7 @@ void keyPressed()
      power=0;
     loop();
   }
-   if(key=='p')
+   if(key=='p')//this will pause the game when you press 'p'
   {
        au_player3.play(10) ; 
     noLoop();
@@ -749,7 +735,7 @@ void keyPressed()
     
     
   }
-    if(key=='l')
+    if(key=='l')//this will resume the game when 'l'is pressed
     {
       loop();
     }

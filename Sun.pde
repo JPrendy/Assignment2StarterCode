@@ -3,6 +3,7 @@ class Sun extends GameObject
   float radius;
   float points;
   
+  //this is the suns positons
   Sun(float x, float y, float radius, float points)
   {
     this.x = x;
@@ -12,16 +13,17 @@ class Sun extends GameObject
     this.theta = 0;
   }
   
+  //this is what we use th specify the location
   Sun()
   {
     this(width / 2, height / 2, 100, 5);
   }
-  
+  //this is used for the rotation
   void move()
   {
     theta += 0.01;
   }
-  
+  //this displays the sun and cause it to continually to rotate
   void display()
   {
     pushMatrix();
@@ -32,7 +34,7 @@ class Sun extends GameObject
     float  lastx = 0, lasty = -radius;
     float theta1 = 0;
     float thetaInc = TWO_PI / (points * 2);
-    
+    //we are using the rotation of the star
     for(int i = 0 ; i < (points * 2) ; i ++)
     {
       theta1 += thetaInc;
